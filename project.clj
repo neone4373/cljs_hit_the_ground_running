@@ -31,7 +31,7 @@
                                         :source-map    "resources/public/js/out.js.map"
                                         :preamble      ["react/react.min.js"]
                                         :externs       ["react/externs/react.js"]
-                                        :optimizations :whitespace
+                                        :optimizations :none
                                         :pretty-print  true}}}}
 
   :profiles {:dev {:repl-options {:init-ns          cljs-hit-the-ground-running.server
@@ -46,7 +46,7 @@
                                   [ring-mock "0.1.5"]               ;; for testing ring responses
                                   [speclj "3.1.0"]]                 ;; dev testing dependencies
                    :cljsbuild    {:builds {:app {:source-paths   ["env/dev/cljs"]
-                                                 :notify-command ["phantomjs"  "bin/speclj" "resources/public/js/app.js"] ; notify the test results on auto-comile
+                                                 :notify-command ["phantomjs"  "bin/speclj" "resources/private/test.html"] ; notify the test results on auto-comile
                                                                                                   ;; :notify-command ["phantomjs"  "bin/speclj" "resources/private/test.html"] ; notify the test results on auto-comile
                                                  }}
                                   :test-commands {"test" ["phantomjs" "bin/speclj" "resources/private/test.html"]} ;; initialize the specljs test with phantom

@@ -9,19 +9,11 @@ p.onConsoleMessage = function (x) {
     fs.write("/dev/stdout", x, "w");
 };
 
-console.log("Loading URL: " + url);
-
-// page.onConsoleMessage = function (message) {
-//     console.log("Test console: " + message);
-// };
-
 p.open(url, function (status) {
     if (status != "success") {
         console.log('Failed to open ' + url);
         phantom.exit(1);
     }
-
-    console.log("Running test.");
 
     var result = p.evaluate(function () {
         speclj.run.standard.armed = true;
@@ -31,73 +23,4 @@ p.open(url, function (status) {
     });
 
     phantom.exit(result);
-
-
-    // var result = page.evaluate(function() {
-    //     return example.test.run();
-    // });
-
-    // // NOTE: PhantomJS 1.4.0 has a bug that prevents the exit codes
-    // //        below from being returned properly. :(
-    // //
-    // // http://code.google.com/p/phantomjs/issues/detail?id=294
-
-    // if (result != 0) {
-    //     console.log("*** Test failed! ***");
-    //     phantom.exit(1);
-    // }
-
-    // console.log("Test succeeded.");
-    // phantom.exit(0);
-
-
 });
-
-
-
-
-// p.injectJs(phantom.args[0]);
-
-// var result = p.evaluate(function () {
-//   speclj.run.standard.armed = true;
-//   return speclj.run.standard.run_specs(
-//      cljs.core.keyword("color"), true
-//   );
-// });
-
-// phantom.exit(result);
-
-// #! /usr/bin/env phantomjs
-// var fs = require("fs");
-// var p = require('webpage').create();
-// var sys = require('system');
-// p.onConsoleMessage = function (x) {
-//     fs.write("/dev/stdout", x, "w");
-// };
-// console.log(phantom.args.length)
-// // p.injectJs("/js/out/speclj/core.js")
-// // p.injectJs(phantom.args[0]);
-// // for(var b in window) {
-// //    if(window.hasOwnProperty(b)) console.log(b);
-// // }
-// // console.log("phantom")
-// p.open('js/asd.js', function(status) {
-//   console.log('Status: ' + status);
-//   // Do other things here...
-// });
-// var result;
-// p.includeJs("public/js/out/speclj/core.js", function () {
-//     for (var i in phantom.args) {
-//         var txt = phantom.args[i]
-//         p.injectJs(txt)
-//         console.log(txt)
-//     }
-//     result = p.evaluate(function () {
-//         speclj.run.standard.armed = true;
-//         return speclj.run.standard.run_specs(
-//             cljs.core.keyword("color"), true
-//         );
-//     });
-// console.log("things?" + result)
-// });
-// phantom.exit(result);
