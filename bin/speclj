@@ -1,5 +1,11 @@
 #! /usr/bin/env phantomjs
 
+// if (phantom.args.length != 1) {
+//     console.log('Expected a target URL parameter.');
+//     console.log(phantom.args);
+//     phantom.exit(1);
+// }
+
 var fs = require("fs");
 var p = require('webpage').create();
 var sys = require('system');
@@ -7,6 +13,7 @@ var url = phantom.args[0];
 
 p.onConsoleMessage = function (x) {
     fs.write("/dev/stdout", x, "w");
+    // console.log("Test console: " + x);
 };
 
 p.open(url, function (status) {
@@ -19,8 +26,13 @@ p.open(url, function (status) {
         speclj.run.standard.armed = true;
         return speclj.run.standard.run_specs(
             cljs.core.keyword("color"), true
+            // ,cljs.core.keyword("stacktrace"), false
+
         );
     });
+
+    // console.log( result);
+
 
     phantom.exit(result);
 });

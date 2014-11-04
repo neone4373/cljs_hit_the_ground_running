@@ -19,7 +19,7 @@
                  [leiningen "2.5.0"]]
   :plugins [[lein-cljsbuild "1.0.3"]
             [lein-environ "1.0.0"]
-            [speclj "3.1.0"]         ;; speclj dependency
+            [speclj "3.0.0"]         ;; speclj dependency
             [lein-ancient "0.5.4"]]  ;; running lein ancient will give you a list of your out of date dependencies
 
   :min-lein-version "2.5.0"
@@ -32,7 +32,11 @@
                                         :preamble      ["react/react.min.js"]
                                         :externs       ["react/externs/react.js"]
                                         :optimizations :none
-                                        :pretty-print  true}}}}
+                                        :pretty-print  true}
+                             :notify-command ["phantomjs"  "bin/speclj" "resources/private/test.html"] ; notify the test results on auto-comile
+                             }}
+              :test-commands {"test" ["phantomjs" "bin/speclj" "resources/private/test.html"]} ;; initialize the specljs test with phantom
+              }
 
   :profiles {:dev {:repl-options {:init-ns          cljs-hit-the-ground-running.server
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
@@ -44,16 +48,8 @@
                    :dependencies [[org.clojure/clojurescript "0.0-2371"]
                                   [javax.servlet/servlet-api "2.5"] ;; testing the web server
                                   [ring-mock "0.1.5"]               ;; for testing ring responses
-                                  [speclj "3.1.0"]]                 ;; dev testing dependencies
-                   :cljsbuild    {:builds {:app {:source-paths   ["env/dev/cljs"]
-                                                 :notify-command ["phantomjs"  "bin/speclj" "resources/private/test.html"] ; notify the test results on auto-comile
-                                                                                                  ;; :notify-command ["phantomjs"  "bin/speclj" "resources/private/test.html"] ; notify the test results on auto-comile
-                                                 }}
-                                  :test-commands {"test" ["phantomjs" "bin/speclj" "resources/private/test.html"]} ;; initialize the specljs test with phantom
-                                  ; :test-commands {"test" ["phantomjs" "bin/speclj" "resources/public/js/app.js"]} ;; initialize the specljs test with phantom
-                                  }
-
-                               }
+                                  [speclj "3.0.0"]]                 ;; dev testing dependencies
+                   :cljsbuild    {:builds {:app {:source-paths   ["env/dev/cljs"]}}} }
              :uberjar {:hooks [leiningen.cljsbuild]
                        :env {:production true}
                        :omit-source true
