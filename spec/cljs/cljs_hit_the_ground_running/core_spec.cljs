@@ -1,11 +1,11 @@
 (ns cljs-hit-the-ground-running.core-spec
   (:require-macros [speclj.core :refer [describe it should=]])
-  (:require [speclj.core :refer :all]
-            [cljs-hit-the-ground-running.core :refer :all]))
+  (:require [speclj.core]
+              [cljs-hit-the-ground-running.core]))
 
 (describe "A ClojureScript test"
-  (it "fail. Fix it!"
-    (should= 1 1)))
+          (it "fail. Fix it!"
+              (should= 1 1)))
 
 
 ;; Tutorial Tests:
