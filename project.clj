@@ -1,5 +1,5 @@
 (defproject cljs_hit_the_ground_running "0.1.0"
-  :description "Sample App Showing off D3 and Om in CLJS"
+  :description "Sample App Showing off Speclj and Om in CLJS"
   :url "http://cljsd3om.example.com"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}

@@ -341,7 +341,7 @@ With that you should now have:
 2. An auto-run auto compile Specljs service alerting you for you .cljs tests
 3. A live update repl allowing you to interact live with the browser
 
-With that you should be ready to get hacking on an Om.  For next steps I would recommend David Nolan's [basic tutorial](https://github.com/swannodette/om/wiki/Basic-Tutorial "Basic Tutorial") to get you started with the Om's core concepts.  Though it is light table centric, there is plenty to be gained from any development environment.
+With that you should be ready to get hacking on an Om.  For next steps I would recommend David Nolan's [basic tutorial](https://github.com/swannodette/om/wiki/Basic-Tutorial "Basic Tutorial") to get you started with the Om's core concepts.  Though it is light table centric, there is plenty to be gained from any development environment.  Also for those of you interested the full project source is available here: `https://github.com/neone4373/cljs_hit_the_ground_running`.
 
 Thanks for reading.
 

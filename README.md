@@ -14,6 +14,15 @@ In the REPL do
 (browser-repl)
 ```
 
+
+In the Cider REPL do
+
+```clojure
+(cljs-hit-the-ground-running.server/run)
+(cljs-hit-the-ground-running.dev/browser-repl)
+```
+
+
 The call to `(run)` does two things, it starts the webserver at port
 10555, and also the Figwheel server which takes care of live reloading
 ClojureScript code and CSS. Give them some time to start.
