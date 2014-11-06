@@ -51,7 +51,7 @@ While this is an amazing start we still are going to need to do a bit of work to
 
 ```clojure
 (defproject cljs_hit_the_ground_running "0.1.0"
-  :description "Sample App Showing off D3 and Om in CLJS"
+  :description "Sample App Showing off Speclj and Om in CLJS"
   :url "http://cljsd3om.example.com"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
@@ -77,7 +77,7 @@ While this is an amazing start we still are going to need to do a bit of work to
   :min-lein-version "2.5.0"
   :uberjar-name "cljs_hit_the_ground_running.jar"
 
-  :cljsbuild {:builds {:app {:source-paths ["src/cljs"]  ;; add the spec files to run the test upon autocompile
+  :cljsbuild {:builds {:app {:source-paths ["src/cljs"] 
                              :compiler {:output-to     "resources/public/js/app.js"
                                         :output-dir    "resources/public/js/out"
                                         :source-map    "resources/public/js/out.js.map"
@@ -86,7 +86,7 @@ While this is an amazing start we still are going to need to do a bit of work to
                                         :optimizations :none
                                         :pretty-print  false}}
                         ;; speclj looks for the dev when running so we need to create a whole new build for it
-                        :dev {:source-paths ["src/cljs"  "spec/cljs"]  ;; add the spec files to run the test upon autocompile
+                        :dev {:source-paths ["src/cljs"  "spec/cljs"]  ;; add the spec folder to run the test upon autocompile
                              :compiler {:output-to     "resources/public/js/app_spec.js"
                                         :output-dir    "resources/public/js/spec"
                                         :source-map    "resources/public/js/spec.js.map"
@@ -96,7 +96,7 @@ While this is an amazing start we still are going to need to do a bit of work to
                                         :pretty-print  false}
                               :notify-command ["phantomjs"  "bin/speclj" "resources/public/js/app_spec.js"] ; notify the test results on auto-comile of the dev build
                               }}
-              :test-commands {"test" ["phantomjs" "bin/speclj" "resources/public/js/app_spec.js"]} ;; initialize the specljs test with phantom
+              :test-commands {"test" ["phantomjs" "bin/speclj" "resources/public/js/app_spec.js"]} ;; initialize the specljs tests with phantomjs
               }
 
   :profiles {:dev {:repl-options {:init-ns          cljs-hit-the-ground-running.server
@@ -140,6 +140,7 @@ p.onConsoleMessage = function (x) {
 
 p.injectJs("resources/public/js/polyfill.js");
 // note the polyfill file, this is added to play nice with React
+
 p.injectJs(phantom.args[0]);
 
 var result = p.evaluate(function () {
@@ -233,7 +234,7 @@ Update the default app state for our hello world moment:
   (:require [om.core :as om :include-macros true]
             [om.dom :as dom :include-macros true]))
 
-(defonce app-state (atom {:text "Hello Moo Cow!"})) ;; Changing this :text will change the h1 element displays 
+(defonce app-state (atom {:text "Hello Moo Cow!"})) ;; Changing this :text will change the h1 element displays in the browser
 
 (defn main []
   (om/root
