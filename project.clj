@@ -25,7 +25,7 @@
   :min-lein-version "2.5.0"
   :uberjar-name "cljs_hit_the_ground_running.jar"
 
-  :cljsbuild {:builds {:app {:source-paths ["src/cljs"]  ;; add the spec files to run the test upon autocompile
+  :cljsbuild {:builds {:app {:source-paths ["src/cljs"] 
                              :compiler {:output-to     "resources/public/js/app.js"
                                         :output-dir    "resources/public/js/out"
                                         :source-map    "resources/public/js/out.js.map"
@@ -34,7 +34,7 @@
                                         :optimizations :none
                                         :pretty-print  false}}
                         ;; speclj looks for the dev when running so we need to create a whole new build for it
-                        :dev {:source-paths ["src/cljs"  "spec/cljs"]  ;; add the spec files to run the test upon autocompile
+                        :dev {:source-paths ["src/cljs"  "spec/cljs"]  ;; add the spec folder to run the test upon autocompile
                              :compiler {:output-to     "resources/public/js/app_spec.js"
                                         :output-dir    "resources/public/js/spec"
                                         :source-map    "resources/public/js/spec.js.map"

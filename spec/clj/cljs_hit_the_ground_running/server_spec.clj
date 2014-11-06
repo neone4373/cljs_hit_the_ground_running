@@ -3,5 +3,5 @@
             [cljs-hit-the-ground-running.server :refer :all]))
 
 (describe "Web Tests"
-          (it "It has app"
-              (should run)))
+          (it "fail. Fix it!"
+              (should= 0 1)))
