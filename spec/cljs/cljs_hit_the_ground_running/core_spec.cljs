@@ -25,5 +25,3 @@
 
 ;; test the jsonp query
 ;; (go (.log js/console (<! (jsonp (query-url "cats")))))
-
-;; (run-specs)
