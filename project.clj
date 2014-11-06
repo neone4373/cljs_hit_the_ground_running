@@ -33,6 +33,7 @@
                                         :externs       ["react/externs/react.js"]
                                         :optimizations :none
                                         :pretty-print  false}}
+                        ;; speclj looks for the dev when running so we need to create a whole new build for it
                         :dev {:source-paths ["src/cljs"  "spec/cljs"]  ;; add the spec files to run the test upon autocompile
                              :compiler {:output-to     "resources/public/js/app_spec.js"
                                         :output-dir    "resources/public/js/spec"
@@ -41,9 +42,8 @@
                                         :externs       ["react/externs/react.js"]
                                         :optimizations :whitespace
                                         :pretty-print  false}
-                              :notify-command ["phantomjs"  "bin/speclj" "resources/public/js/app_spec.js"] ; notify the test results on auto-comile
-                                        ; "resources/test.html"
-                                        }}
+                              :notify-command ["phantomjs"  "bin/speclj" "resources/public/js/app_spec.js"] ; notify the test results on auto-comile of the dev build
+                              }}
               :test-commands {"test" ["phantomjs" "bin/speclj" "resources/public/js/app_spec.js"]} ;; initialize the specljs test with phantom
               }
 
@@ -58,12 +58,7 @@
                                   [javax.servlet/servlet-api "2.5"] ;; testing the web server
                                   [ring-mock "0.1.5"]               ;; for testing ring responses
                                   [speclj "3.1.0"]]                 ;; dev testing dependencies
-                   :cljsbuild    {:builds {:app {:source-paths   ["env/dev/cljs"]
-                                                 
-                                                 }}
-                                  }
-
-                               }
+                   :cljsbuild    {:builds {:app {:source-paths   ["env/dev/cljs"]}}}
              :uberjar {:hooks [leiningen.cljsbuild]
                        :env {:production true}
                        :omit-source true
@@ -72,4 +67,4 @@
                                             {:source-paths ["env/prod/cljs"]
                                              :compiler
                                              {:optimizations :advanced
-                                              :pretty-print false}}}}}})
+                                              :pretty-print false}}}}}}})
