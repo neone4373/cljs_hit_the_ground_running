@@ -170,8 +170,3 @@ If you do not plan on using Emacs-Live you can skip this section, otherwise read
 
 
 
-
-
-
-
-

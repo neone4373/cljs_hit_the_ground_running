@@ -6,6 +6,7 @@
 //     phantom.exit(1);
 // }
 
+
 var fs = require("fs");
 var p = require('webpage').create();
 var sys = require('system');
@@ -16,23 +17,29 @@ p.onConsoleMessage = function (x) {
     // console.log("Test console: " + x);
 };
 
-p.open(url, function (status) {
-    if (status != "success") {
-        console.log('Failed to open ' + url);
-        phantom.exit(1);
-    }
+// p.open(url, function (status) {
+//     if (status != "success") {
+//         console.log('Failed to open ' + url);
+//         phantom.exit(1);
+//     }
 
-    var result = p.evaluate(function () {
-        speclj.run.standard.armed = true;
-        return speclj.run.standard.run_specs(
-            cljs.core.keyword("color"), true
-            // ,cljs.core.keyword("stacktrace"), false
+p.injectJs("resources/public/js/polyfill.js");
 
-        );
-    });
+p.injectJs(phantom.args[0]);
 
-    // console.log( result);
+// console.log(p.content)
 
+var result = p.evaluate(function () {
+    speclj.run.standard.armed = true;
+    return speclj.run.standard.run_specs(
+        cljs.core.keyword("color"), true
+        // ,cljs.core.keyword("stacktrace"), false
 
-    phantom.exit(result);
+    );
 });
+
+// console.log( result);
+
+
+phantom.exit(result);
+// });

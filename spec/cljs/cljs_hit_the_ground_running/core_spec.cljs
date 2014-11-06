@@ -5,17 +5,15 @@
             [cljs-hit-the-ground-running.core]
             [om.dom :as dom :include-macros true]))
 
-
-
 (describe "A ClojureScript test"
           (it "fail. Fix it!"
               (should= 0 1)))
 
-(println "Hi Mom!")
+;; (println "Hi Mom!")
 
 ;; Tutorial Tests:
 
-(.log js/console (. js/document (getElementById "app"))
+#_(.log js/console (. js/document (getElementById "app"))
       ;(dom/getElementById "query")
       )
 ;; Shows the dom element named #query
