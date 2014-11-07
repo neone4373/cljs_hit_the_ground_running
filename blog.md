@@ -1,6 +1,6 @@
-I made the switch to [Clojure](http://clojure.org/ "Clojure") a little over a year ago, and since then have became obsessed with pulling as much of the development process into the Clojure world as practical.  While I have been looking to get into [ClojureScript](https://github.com/clojure/clojurescript "ClojureScript") for a long time I have always had a lot of trouble getting started.  Often I would block off some time to build a sample app and spend almost all of my time struggling to get the repl to connect to the browser, and be too exhausted to actually build anything.  Fortunately I have finally gotten everything behaving, I today I am going to walk you through doing the same.
+I made the switch to [Clojure](http://clojure.org/ "Clojure") a little over a year ago, and since then have become obsessed with pulling as much of the development process into the Clojure world as practical.  While I have been looking to get into [ClojureScript](https://github.com/clojure/clojurescript "ClojureScript") for a long time I have always had a lot of trouble getting started.  Often I would block off some time to build a sample app and spend almost all of my time struggling to get the repl to connect to the browser, and be too exhausted to actually build anything.  Fortunately I have finally gotten everything behaving, today I am going to walk you through doing the same.
 
-A little about my setup, in my Clojure development environment I run TTD with [Speclj](http://www.speclj.com "Speclj"), and live coding in [Emacs](https://www.gnu.org/software/emacs/ "Emacs") with the excellent [Emacs-Live](https://github.com/overtone/emacs-live "Emacs-Live") package.  This allow for an instant feedback cycle for both running code snippet, in emacs documentation, unit tests, and the full end to end tests.  It was very important to me to have the same degree of control and being able to use the same tools for my ClojureScript development environment.  Lucky for me I discovered [Chestnut](https://github.com/plexus/chestnut "Chestnut").
+A little about my setup, in my Clojure development environment I run TTD with [Speclj](http://www.speclj.com "Speclj"), and live coding in [Emacs](https://www.gnu.org/software/emacs/ "Emacs") with the excellent [Emacs-Live](https://github.com/overtone/emacs-live "Emacs-Live") package.  This allow for an instant feedback cycle for both running code snippet, in emacs documentation, unit tests, and the full end to end tests.  It was very important to me to have the same degree of control and be able to use the same tools for my ClojureScript development environment.  Lucky for me I discovered [Chestnut](https://github.com/plexus/chestnut "Chestnut").
 
 Chestnut is a Clojure(Script) template that out of the box gives you [Ring](https://github.com/ring-clojure/ring "Ring") support for web application support, [Figwheel](https://github.com/bhauman/lein-figwheel "Figwheel") to push ClojureScript changes to the client, [Weasel](https://github.com/tomjakubowski/weasel "Weasel") for the ClojureScript Browser REPL connection via WebSocket, and the powerful [Om](https://github.com/swannodette/om "Om") to give us the latest and greatest from Facebook’s [React](https://github.com/facebook/react "React") library.  
 
@@ -122,7 +122,7 @@ While this is an amazing start we still are going to need to do a bit of work to
                                               :pretty-print false}}}}}}})
 ```
 
-To run the cljs tests we are going to need [Phantomjs](http://phantomjs.org/ "PhantomJS") installed.  If you use [Homebrew](http://brew.sh/ "Homebrew") it is as simple as `$ brew install phantomjs`.  Once that is ready to go create runner file for PhantomJs:
+To run the cljs tests we are going to need [PhantomJs](http://phantomjs.org/ "PhantomJS") installed.  If you use [Homebrew](http://brew.sh/ "Homebrew") it is as simple as `$ brew install phantomjs`.  Once that is ready to go create runner file for PhantomJs:
 
 `bin/speclj`
 
@@ -255,7 +255,7 @@ Update the default app state for our hello world moment:
 
 If you do not plan on using Emacs-Live you can skip the next two sections, otherwise read on. 
 
-Now is a good time to double check the version of [Cider](https://github.com/clojure-emacs/cider "Cider") being run by your `M-x cider-jack-in`.  At the time of these writing the default Emacs-Live installation had cider 0.6.0, which does not play well with with the cljs repl.  The easiest way to update this is change your ~/.lein/profiles.clj to look like so.  Also if you already have a profiles.clj, you can just add the two plug-ins below and it should take care of it.
+Now is a good time to double check the version of [Cider](https://github.com/clojure-emacs/cider "Cider") being run by your `M-x cider-jack-in`.  At the time of this writing the default Emacs-Live installation had cider 0.6.0, which does not play well with with the cljs repl.  The easiest way to update this is change your ~/.lein/profiles.clj to look like so.  Also if you already have a profiles.clj, you can just add the two plug-ins below and it should take care of it.
 
 `~/.lein/profiles.clj`
 
@@ -265,15 +265,15 @@ Now is a good time to double check the version of [Cider](https://github.com/clo
     [lein-localrepo "0.5.3"]]}}
 ```
 
-Additionally, now that we have cider 0.7.0 the Emacs plug-in auto-complete will start causing all sorts of hanging and trouble.  I wish I had a non-hacky way to solve this but sadly the intricacies of the Emacs-Live package system are still opaque to me.  The hackey solution is in emacs `M-x package-install company` which will give us [Company-Mode](https://company-mode.github.io/ "Company Mode") a non-buggy replacement for auto-complete.  Then whenever you open a clj do `M-x auto-complete-mode` to disable it.  I know, its really hackey but for now this is the best I have so lets just get to the good part.
+Additionally, now that we have cider 0.7.0 the Emacs plug-in [Auto-Complete-Mode](http://cx4a.org/software/auto-complete/ "Auto-Complete-Mode") will start causing all sorts of hanging and trouble.  I wish I had a non-hacky way to solve this but sadly the intricacies of the Emacs-Live package system are still opaque to me.  The hacky solution is in emacs `M-x package-install company` which will give us [Company-Mode](https://company-mode.github.io/ "Company-Mode") a non-buggy replacement for Auto-Complete-Mode.  Then whenever you open a clj do `M-x auto-complete-mode` to disable it.  I know, its really hacky but for now this is the best I have so let's just get to the good part.
 
-With the heavy lifting complete lets confirm we are good to go.
+With the heavy lifting complete let's confirm we are good to go.
 
 Step one, Speclj auto-run testing:
 
 ```bash
 $ lein spec -a
-# let hope you see something similar to the below:
+# let's hope you see something similar to the below:
 
 ----- Thu Nov 06 15:07:15 EST 2014 -------------------------------------------------------------------
 took 0.10117 to determine file statuses.
@@ -336,7 +336,7 @@ clojure.core> (cljs-hit-the-ground-running.server/run)
 clojure.core>  (cljs-hit-the-ground-running.dev/browser-repl)
 ```
 
-If everything went well and we haven't fallen out of the development gods' favor, then opening up your web browser to `localhost:10555` and you should see "Hello Moo Cow!" smiling down at you.
+Now open your favorite web browser to `localhost:10555`. If everything went well and we haven't fallen out of the development gods' favor, then you should see "Hello Moo Cow!" smiling down at you.
 
 Finally, our last step is to inform the browser you are its new master by issuing it a command:
 
@@ -351,7 +351,7 @@ With that you should now have:
 2. An auto-run auto-compile Specljs service alerting you for your .cljs tests
 3. A repl connection allowing you to interact live with the browser
 
-Of course I have left the making the test pass up to the reader.  Once that is done you should be ready to get hacking on an Om.  For next steps I would recommend David Nolan's [basic tutorial](https://github.com/swannodette/om/wiki/Basic-Tutorial "Basic Tutorial") to get you started with the Om's core concepts.  Though it is light table centric, there is plenty to be gained from any development environment.  The full project source is available here: `https://github.com/neone4373/cljs_hit_the_ground_running`.
+I have, left the making the test pass up to the reader.  Once this is done you should be ready to get hacking on an Om.  For next steps I would recommend David Nolan's [basic tutorial](https://github.com/swannodette/om/wiki/Basic-Tutorial "Basic Tutorial") to get you started with the Om's core concepts.  Though it is light table centric, there is plenty to be gained from any development environment.  The full project source is available here: `https://github.com/neone4373/cljs_hit_the_ground_running`.
 
 Thanks for reading.
 

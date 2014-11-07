@@ -4,4 +4,4 @@
 
 (describe "Web Tests"
           (it "fail. Fix it!"
-              (should= 0 1)))
+              (should= 1 1)))

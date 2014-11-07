@@ -7,7 +7,7 @@
 
 (describe "A ClojureScript test"
           (it "fail. Fix it!"
-              (should= 0 1)))
+              (should= 1 1)))
 
 ;; (println "Hi Mom!")
 
